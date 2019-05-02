@@ -61,7 +61,7 @@ unsigned int hash(char *str, int max)
     hash = ((hash << 5) + hash) + c;
   }
 
-  return hash % max;
+  return hash % max; 
 }
 
 /****
@@ -87,6 +87,14 @@ BasicHashTable *create_hash_table(int capacity)
  ****/
 void hash_table_insert(BasicHashTable *ht, char *key, char *value)
 {
+  int hashed = hash(key, ht->capacity);
+
+  if (ht->storage[hashed] != NULL)
+  {
+    fprintf(stderr, "warning overwriting key");
+  }
+
+  ht->storage[hashed] = create_pair(key, value);
 }
 
 /****
