@@ -61,7 +61,7 @@ unsigned int hash(char *str, int max)
     hash = ((hash << 5) + hash) + c;
   }
 
-  return hash % max; 
+  return hash % max;
 }
 
 /****
@@ -136,6 +136,13 @@ char *hash_table_retrieve(BasicHashTable *ht, char *key)
  ****/
 void destroy_hash_table(BasicHashTable *ht)
 {
+  int i = 0;
+  while (i < ht->capacity)
+  {
+    destroy_pair(ht->storage[i]);
+    i++;
+  }
+  free(ht->storage);
   free(ht);
 }
 
